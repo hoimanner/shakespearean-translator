@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shakespearean Translator</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f4f1e0;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #6b4226;
+        }
+
+        textarea {
+            width: 90%;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 1.1em;
+            border: 2px solid #6b4226;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #6b4226;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #814c2e;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 1.3em;
+            padding: 10px;
+            border: 1px solid #6b4226;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shakespearean Translator</h1>
+    <textarea id="modernText" placeholder="Enter modern English text..."></textarea>
+    <br>
+    <button id="translateButton">Translate</button>
+    <div id="output"></div>
+
+    <script>
+        const shakespeareanDictionary = {
+            "hello": "hail",
+            "goodbye": "farewell",
+            "friend": "comrade",
+            "love": "affection",
+            "you": "thou",
+            "are": "art",
+            "your": "thy",
+            "yours": "thine",
+            "do": "dost",
+            "does": "doth",
+            "have": "hast",
+            "has": "hath",
+            "not": "nay",
+            "yes": "aye",
+            "the": "ye",
+            "a": "one",
+            "I": "I",
+            "is": "is",
+            "we": "we",
+            "us": "us",
+            "it": "it",
+            "to": "unto",
+            "what": "what",
+            "who": "who",
+            "where": "whither",
+            "when": "whence",
+            "why": "wherefore",
+            "how": "how",
+            "for": "for",
+            "but": "but",
+            "and": "and",
+            "in": "in",
+            "on": "on",
+            "with": "with",
+            "from": "from",
+        };
+
+        document.getElementById("translateButton").addEventListener("click", () => {
+            const modernText = document.getElementById("modernText").value.trim().toLowerCase();
+            const outputDiv = document.getElementById("output");
+
+            if (!modernText) {
+                outputDiv.textContent = "Please enter some text to translate.";
+                return;
+            }
+
+            const translatedText = modernText
+                .split(/\b/) // Split by words and preserve spaces/punctuation
+                .map(word => shakespeareanDictionary[word] || word) // Translate or keep original
+                .join("");
+
+            outputDiv.textContent = translatedText.charAt(0).toUpperCase() + translatedText.slice(1); // Capitalize
+        });
+    </script>
+</body>
+</html>
